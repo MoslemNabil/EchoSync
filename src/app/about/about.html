@@ -1,0 +1,63 @@
+<div class="container about-container">
+  <h1>App Architecture & Guide</h1>
+
+  <section class="diagram-section">
+    <h2>Project Mind Map</h2>
+    <div class="mindmap">
+      <div class="node user">🎤 User Speech</div>
+      <div class="arrow">↓ (Web Speech API)</div>
+      <div class="node frontend">🖥️ Angular App (Frontend)</div>
+      <div class="arrow">↓ (HTTP POST)</div>
+      <div class="node backend">⚙️ NestJS API (Backend)</div>
+      <div class="arrow">↓ (Node.js fs)</div>
+      <div class="node storage">📄 data.csv (Raw Storage)</div>
+      <div class="arrow">↓ (Python Logic)</div>
+      <div class="node script">🐍 clean_data.py (Script)</div>
+      <div class="arrow">↓ (Generates)</div>
+      <div class="node storage">✨ cleaned_data.csv (Cleaned)</div>
+      <div class="arrow">↓ (HTTP GET)</div>
+      <div class="node frontend">📊 Angular Table (Display)</div>
+    </div>
+  </section>
+
+  <section class="files-section">
+    <h2>File Directory Breakdown</h2>
+    <div class="file-grid">
+      <div class="file-card">
+        <h3>Frontend (Angular)</h3>
+        <ul>
+          <li><strong>speech.service.ts</strong>: Manages the browser's Web Speech API.</li>
+          <li><strong>app.ts</strong>: Coordinates recording, saving, and loading data.</li>
+          <li><strong>app.html/css</strong>: The user interface and visual styling.</li>
+        </ul>
+      </div>
+      <div class="file-card">
+        <h3>Backend (NestJS)</h3>
+        <ul>
+          <li><strong>app.controller.ts</strong>: Handles incoming API requests (POST/GET).</li>
+          <li><strong>app.service.ts</strong>: Contains the logic for reading/writing CSV files.</li>
+          <li><strong>main.ts</strong>: Configures the server (CORS, Port 3000).</li>
+        </ul>
+      </div>
+      <div class="file-card">
+        <h3>Python & Data</h3>
+        <ul>
+          <li><strong>scripts/clean_data.py</strong>: Cleans raw CSV data (lowercase, trim).</li>
+          <li><strong>data.csv</strong>: The "living" file where raw text is appended.</li>
+          <li><strong>cleaned_data.csv</strong>: The "normalized" version for analysis.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="guide-section">
+    <h2>Quick Start Guide</h2>
+    <ol>
+      <li>Start Backend: <code>cd backend && npm run start:dev</code></li>
+      <li>Start Frontend: <code>npm start</code></li>
+      <li>Speak in the app and click <strong>Save</strong>.</li>
+      <li>Run <code>python scripts/clean_data.py</code> in your terminal.</li>
+      <li>Click <strong>Load Cleaned Data</strong> in the app to see the magic!</li>
+    </ol>
+  </section>
+</div>

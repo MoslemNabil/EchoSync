@@ -1,0 +1,44 @@
+<main class="container">
+  <h1>{{ title() }}</h1>
+  
+  <div class="controls">
+    <button (click)="startRecording()" [disabled]="speech.isRecording()">Start Recording</button>
+    <button (click)="stopRecording()" [disabled]="!speech.isRecording()">Stop Recording</button>
+    <button (click)="saveData()" [disabled]="!speech.transcript()">Save to Backend</button>
+  </div>
+
+  <div class="status-indicator" *ngIf="speech.isRecording()">
+    🔴 Recording...
+  </div>
+  
+  <div class="save-status" *ngIf="saveStatus()">
+    {{ saveStatus() }}
+  </div>
+
+  <div class="transcript-box">
+    <h3>Transcript:</h3>
+    <p>{{ speech.transcript() || 'Waiting for voice input...' }}</p>
+  </div>
+
+  <div class="cleaned-section" style="margin-top: 3rem;">
+    <button (click)="loadCleanedData()">Load Cleaned Data from Python</button>
+    
+    <div *ngIf="cleanedData().length > 0" class="data-table">
+      <h3>Normalized Data (Cleaned):</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Cleaned Text</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cleanedData()">
+            <td>{{ item.timestamp | date:'short' }}</td>
+            <td class="text-normalized">{{ item.text }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
